@@ -1,0 +1,15 @@
+# Secret keys - never upload
+.env
+.env.local
+.env*.local
+
+# Installed packages and build output
+node_modules/
+.next/
+out/
+build/
+
+# Misc
+.DS_Store
+*.log
+.vercel

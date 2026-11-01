@@ -1,0 +1,179 @@
+/* All colors and sizes come from config.js (see app/layout.js). */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: var(--size-body);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 16px;
+  gap: 16px;
+}
+
+.card {
+  width: 100%;
+  max-width: var(--card-max-width);
+  background: var(--card);
+  border-radius: var(--card-radius);
+  box-shadow: var(--shadow);
+  padding: 28px 22px;
+}
+
+.title {
+  margin: 0 0 8px;
+  font-size: var(--size-title);
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--text);
+}
+
+.intro {
+  margin: 0 0 22px;
+  color: var(--sub-text);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.input {
+  width: 100%;
+  height: var(--control-height);
+  padding: 0 16px;
+  font-family: inherit;
+  font-size: var(--size-input);
+  color: var(--text);
+  background: #fff;
+  border: 1.5px solid var(--border);
+  border-radius: var(--control-radius);
+  outline: none;
+}
+
+.input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-soft);
+}
+
+.button {
+  width: 100%;
+  height: var(--control-height);
+  font-family: inherit;
+  font-size: var(--size-button);
+  font-weight: 600;
+  color: #fff;
+  background: var(--primary);
+  border: none;
+  border-radius: var(--control-radius);
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.button:hover:not(:disabled) {
+  background: var(--primary-hover);
+}
+
+.button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.error {
+  margin-top: 16px;
+  padding: 14px 16px;
+  background: var(--error-bg);
+  color: var(--error-text);
+  border: 1px solid var(--error-border);
+  border-radius: var(--control-radius);
+  font-size: var(--size-label);
+}
+
+.result-card {
+  padding: 8px 22px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.row:last-child {
+  border-bottom: none;
+}
+
+.label {
+  flex-shrink: 0;
+  color: var(--sub-text);
+  font-size: var(--size-label);
+  font-weight: 500;
+}
+
+.value {
+  text-align: right;
+  font-size: var(--size-value);
+  font-weight: 600;
+  color: var(--text);
+  word-break: break-word;
+}
+
+.reward {
+  font-size: var(--size-reward);
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.badge {
+  display: inline-block;
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: var(--size-badge);
+  font-weight: 600;
+}
+
+.badge-achieved {
+  background: var(--primary-soft);
+  color: var(--primary-text);
+}
+
+.badge-not {
+  background: var(--gray-badge-bg);
+  color: var(--gray-badge-text);
+}
+
+@media (min-width: 640px) {
+  .page {
+    padding-top: 80px;
+  }
+  .card {
+    padding: 36px 32px;
+  }
+  .result-card {
+    padding: 8px 32px;
+  }
+}
