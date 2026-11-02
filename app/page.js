@@ -4,6 +4,14 @@ import { useState } from "react";
 import { text } from "@/config";
 import { FootstepsIcon, GoalIcon, CalendarIcon, StatusIcon, GiftIcon } from "./icons";
 
+// "8000" -> "8,000 steps". Goals that already contain words are shown as they are.
+function formatGoal(goal) {
+  const raw = String(goal).trim();
+  const digits = raw.replace(/,/g, "");
+  if (!/^\d+$/.test(digits)) return raw;
+  return `${Number(digits).toLocaleString("en-US")} ${text.goalUnit}`;
+}
+
 function formatDays(n) {
   return `${n} ${n === 1 ? text.daySingular : text.dayPlural}`;
 }
@@ -104,7 +112,7 @@ export default function Home() {
               <span className="row-icon icon-goal"><GoalIcon /></span>
               {text.labels.goal}
             </span>
-            <span className="value">{result.goal}</span>
+            <span className="value">{formatGoal(result.goal)}</span>
           </div>
           <div className="row">
             <span className="label">

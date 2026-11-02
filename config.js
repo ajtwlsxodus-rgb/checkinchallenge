@@ -72,7 +72,7 @@ export const text = {
   pageTitle: "Walkonnect Check-In Rewards Challenge", // browser tab title
   title: "Walkonnect Check-In Rewards Challenge",
   intro: "Enter your employee ID to check your challenge results.",
-  inputPlaceholder: "Employee ID",
+  inputPlaceholder: "Employee ID (e.g. 1234, A123)",
   button: "Check Results",
   buttonLoading: "Checking...",
   labels: {
@@ -81,6 +81,7 @@ export const text = {
     status: "Status",
     reward: "Reward",
   },
+  goalUnit: "steps", // shown after a number-only goal: 8000 -> "8,000 steps"
   daySingular: "day",
   dayPlural: "days",
   statusAchieved: "Achieved",
