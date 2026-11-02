@@ -320,4 +320,14 @@ body {
   .row-icon {
     display: none;
   }
+  /* very small phones: keep the whole input hint visible */
+  .card-body {
+    padding: 20px;
+  }
+  .input {
+    padding: 0 14px;
+  }
+  .input::placeholder {
+    font-size: 15px;
+  }
 }
