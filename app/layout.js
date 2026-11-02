@@ -13,21 +13,11 @@ export const viewport = {
 // Pass design values from config.js to the stylesheet
 const c = design.colors;
 const s = design.sizes;
+// Every color in config.js becomes a CSS variable: primaryHover -> --primary-hover
+const toVar = (name) => "--" + name.replace(/[A-Z0-9]+/g, (m) => "-" + m.toLowerCase());
 const cssVars = {
-  "--primary": c.primary,
-  "--primary-hover": c.primaryHover,
-  "--primary-soft": c.primarySoft,
-  "--primary-text": c.primaryText,
+  ...Object.fromEntries(Object.entries(c).map(([k, v]) => [toVar(k), v])),
   "--bg": c.background,
-  "--card": c.card,
-  "--text": c.text,
-  "--sub-text": c.subText,
-  "--border": c.border,
-  "--gray-badge-bg": c.grayBadgeBg,
-  "--gray-badge-text": c.grayBadgeText,
-  "--error-bg": c.errorBg,
-  "--error-text": c.errorText,
-  "--error-border": c.errorBorder,
   "--font": `"${design.font.family}", system-ui, -apple-system, "Segoe UI", sans-serif`,
   "--size-title": s.title,
   "--size-body": s.body,

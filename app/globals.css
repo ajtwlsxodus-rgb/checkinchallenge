@@ -14,7 +14,10 @@ body {
 
 body {
   min-height: 100vh;
-  background: var(--bg);
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(circle at 0% 0%, var(--background-glow-1) 0, transparent 45%),
+    radial-gradient(circle at 100% 100%, var(--background-glow-2) 0, transparent 45%);
   color: var(--text);
   font-family: var(--font);
   font-size: var(--size-body);
@@ -27,8 +30,8 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 40px 16px;
-  gap: 16px;
+  padding: 32px 16px 48px;
+  gap: 18px;
 }
 
 .card {
@@ -37,20 +40,71 @@ body {
   background: var(--card);
   border-radius: var(--card-radius);
   box-shadow: var(--shadow);
-  padding: 28px 22px;
+  overflow: hidden;
+}
+
+/* ---------- Main card: green band + form ---------- */
+.card-header {
+  position: relative;
+  padding: 28px 24px 26px;
+  background: linear-gradient(135deg, var(--header-start), var(--header-end));
+  color: var(--header-text);
+  overflow: hidden;
+}
+
+/* soft light circles for depth */
+.card-header::before,
+.card-header::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  pointer-events: none;
+}
+.card-header::before {
+  width: 180px;
+  height: 180px;
+  top: -70px;
+  right: -50px;
+}
+.card-header::after {
+  width: 110px;
+  height: 110px;
+  bottom: -60px;
+  right: 70px;
+}
+
+.header-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  margin-bottom: 16px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.2);
+  color: var(--header-text);
 }
 
 .title {
+  position: relative;
   margin: 0 0 8px;
   font-size: var(--size-title);
-  font-weight: 700;
+  font-weight: 800;
   line-height: 1.25;
-  color: var(--text);
+  letter-spacing: -0.02em;
+  color: var(--header-text);
 }
 
 .intro {
-  margin: 0 0 22px;
-  color: var(--sub-text);
+  position: relative;
+  margin: 0;
+  color: var(--header-sub-text);
+  font-size: var(--size-label);
+}
+
+.card-body {
+  padding: 24px;
 }
 
 .form {
@@ -62,19 +116,27 @@ body {
 .input {
   width: 100%;
   height: var(--control-height);
-  padding: 0 16px;
+  padding: 0 18px;
   font-family: inherit;
   font-size: var(--size-input);
+  font-weight: 500;
   color: var(--text);
-  background: #fff;
+  background: var(--primary-faint);
   border: 1.5px solid var(--border);
   border-radius: var(--control-radius);
   outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+.input::placeholder {
+  color: var(--sub-text);
+  font-weight: 400;
 }
 
 .input:focus {
+  background: #fff;
   border-color: var(--primary);
-  box-shadow: 0 0 0 3px var(--primary-soft);
+  box-shadow: 0 0 0 4px var(--primary-soft);
 }
 
 .button {
@@ -82,17 +144,23 @@ body {
   height: var(--control-height);
   font-family: inherit;
   font-size: var(--size-button);
-  font-weight: 600;
+  font-weight: 700;
   color: #fff;
-  background: var(--primary);
+  background: linear-gradient(135deg, var(--primary), var(--header-end));
   border: none;
   border-radius: var(--control-radius);
+  box-shadow: 0 6px 16px rgba(22, 163, 74, 0.25);
   cursor: pointer;
-  transition: background 0.15s ease;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
 }
 
 .button:hover:not(:disabled) {
-  background: var(--primary-hover);
+  filter: brightness(0.95);
+  box-shadow: 0 8px 20px rgba(22, 163, 74, 0.3);
+}
+
+.button:active:not(:disabled) {
+  transform: translateY(1px);
 }
 
 .button:disabled {
@@ -110,8 +178,21 @@ body {
   font-size: var(--size-label);
 }
 
+/* ---------- Result card ---------- */
 .result-card {
-  padding: 8px 22px;
+  padding: 8px 24px 20px;
+  animation: rise 0.3s ease-out;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .row {
@@ -123,15 +204,44 @@ body {
   border-bottom: 1px solid var(--border);
 }
 
-.row:last-child {
+.row:nth-last-child(2) {
   border-bottom: none;
 }
 
 .label {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
   flex-shrink: 0;
   color: var(--sub-text);
   font-size: var(--size-label);
   font-weight: 500;
+}
+
+.row-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+}
+
+.icon-goal {
+  color: var(--icon-goal);
+  background: var(--icon-goal-bg);
+}
+.icon-days {
+  color: var(--icon-days);
+  background: var(--icon-days-bg);
+}
+.icon-status {
+  color: var(--icon-status);
+  background: var(--icon-status-bg);
+}
+.icon-reward {
+  color: var(--icon-reward);
+  background: var(--icon-reward-bg);
 }
 
 .value {
@@ -142,23 +252,48 @@ body {
   word-break: break-word;
 }
 
+/* Reward: highlighted box */
+.reward-row {
+  margin-top: 4px;
+  padding: 16px;
+  border: none;
+  border-radius: 16px;
+  background: linear-gradient(135deg, var(--primary-faint), var(--primary-soft));
+}
+
+.reward-row .label {
+  color: var(--primary-dark);
+  font-weight: 600;
+}
+
 .reward {
   font-size: var(--size-reward);
-  font-weight: 700;
-  color: var(--primary);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--primary-dark);
 }
 
 .badge {
-  display: inline-block;
-  padding: 5px 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
   border-radius: 999px;
   font-size: var(--size-badge);
-  font-weight: 600;
+  font-weight: 700;
+}
+
+.badge::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
 }
 
 .badge-achieved {
   background: var(--primary-soft);
-  color: var(--primary-text);
+  color: var(--primary-dark);
 }
 
 .badge-not {
@@ -168,12 +303,21 @@ body {
 
 @media (min-width: 640px) {
   .page {
-    padding-top: 80px;
+    padding-top: 72px;
   }
-  .card {
-    padding: 36px 32px;
+  .card-header {
+    padding: 34px 32px 30px;
+  }
+  .card-body {
+    padding: 28px 32px 32px;
   }
   .result-card {
-    padding: 8px 32px;
+    padding: 8px 32px 24px;
+  }
+}
+
+@media (max-width: 360px) {
+  .row-icon {
+    display: none;
   }
 }
